@@ -1,9 +1,9 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export default class Product extends Model {
-  public id!: number;
-  public name!: string;
-  public price!: number;
+  declare id: number;
+  declare name: string;
+  declare price: number;
 
   static initModel(sequelize: Sequelize) {
     Product.init(

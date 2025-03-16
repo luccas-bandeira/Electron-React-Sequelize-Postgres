@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import initializeDatabase from './database';
-import User from './database/models/User';
+import { UserIpcHandlers } from './ipc/user';
 
 function createWindow(): void {
   // Create the browser window.
@@ -64,16 +64,7 @@ app.whenReady().then(async () => {
     console.error('Erro ao inicializar o banco de dados:', error);
   }
   
-  ipcMain.handle('get-users', async () => {
-    const Users = await User.findAll({ raw: true });
-    console.log(Users)
-    return Users;
-  });
-
-  ipcMain.handle('create-user', async (_, userData) => {
-    const user = await User.create(userData);
-    return user.get()
-  });
+  UserIpcHandlers()
 
   createWindow()
 

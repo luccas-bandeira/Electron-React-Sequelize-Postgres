@@ -8,14 +8,13 @@ function App(): JSX.Element {
   const [response, setResponse] = useState<string | null>(null);
 
   const fetchUsers = async () => {
-    const result = await window.api.getUsers();
-    console.log(result)
+    const result = await window.api.user.getUsers();
     setUsers(result);
   };
   
   const handleCreateUser = async () => {
     try {
-      const user = await window.api.createUser({ name, email }); // Chama a função exposta no preload
+      const user = await window.api.user.createUser({ name, email }); // Chama a função exposta no preload
       
       setResponse(`Usuário criado: ${user.name} (${user.email})`);
       fetchUsers();

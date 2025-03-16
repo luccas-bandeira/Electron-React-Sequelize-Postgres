@@ -1,10 +1,10 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { userIpc } from './ipc/user'
 
 // Custom APIs for renderer
 const api = {
-  createUser: async (userData) => await ipcRenderer.invoke('create-user', userData),
-  getUsers: async () => await ipcRenderer.invoke('get-users')
+  user: userIpc,
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
