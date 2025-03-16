@@ -27,10 +27,11 @@ $ npm run dev
 $ npm run build:win
 # For macOS
 $ npm run build:mac
+# For Linux
+$ npm run build:linux
+```
+
 
 ![image](https://github.com/user-attachments/assets/5399ff2e-5e55-448b-96a1-e62450831708)
 
 
-# For Linux
-$ npm run build:linux
-```
