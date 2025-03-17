@@ -21,6 +21,10 @@ export default class Product extends Model {
           type: DataTypes.FLOAT,
           allowNull: false,
         },
+        custo: {
+          type: DataTypes.FLOAT,
+          allowNull: false,
+        },
       },
       {
         sequelize,

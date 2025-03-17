@@ -1,6 +1,6 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import { userIpc } from './ipc/user'
+import { userIpc } from './ipc/userIpc'
 
 // Custom APIs for renderer
 const api = {
@@ -19,7 +19,7 @@ if (process.contextIsolated) {
   }
 } else {
   // @ts-ignore (define in dts)
-  window.electron = electronAPI
+  (window as any).electron = electronAPI
   // @ts-ignore (define in dts)
-  window.api = api
+  (window as any).api = api
 }

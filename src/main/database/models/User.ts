@@ -1,10 +1,17 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 
-export default class User extends Model {
-  declare id: number;
-  declare name: string;
-  declare email: string;
-  declare telefone: string;
+interface UserAttributes {
+  id: number;
+  name: string;
+  email: string;
+  telefone: string;
+}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+export default class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  public id!: number;
+  public name!: string;
+  public email!: string;
+  public telefone!: string;
 
   static initModel(sequelize: Sequelize) {
     User.init(
@@ -35,3 +42,5 @@ export default class User extends Model {
     );
   }
 }
+
+export type { UserCreationAttributes };
