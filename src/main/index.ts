@@ -1,9 +1,9 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+import icon from '../../resources/icon.png'
 import initializeDatabase from './database';
-import { UserIpcHandlers } from './ipc/user';
+import { AllIpcHandlers } from './ipc';
 
 function createWindow(): void {
   // Create the browser window.
@@ -15,7 +15,9 @@ function createWindow(): void {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,  
+      contextIsolation: true, // Deve ser `true` para segurança e usar `contextBridge`
+      nodeIntegration: false, // Desativado para evitar acesso direto a APIs Node.js
     }
   })
 
@@ -64,7 +66,7 @@ app.whenReady().then(async () => {
     console.error('Erro ao inicializar o banco de dados:', error);
   }
   
-  UserIpcHandlers()
+  AllIpcHandlers()
 
   createWindow()
 

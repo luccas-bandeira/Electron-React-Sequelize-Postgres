@@ -1,5 +1,5 @@
-import sequelize from './config/config'; // Configuração do Sequelize
-import User from './models/User'; // Modelos
+import sequelize from './config/config'; 
+import User from './models/User'; 
 import Product from './models/Product';
 
 const initializeDatabase = async () => {
